@@ -1,3 +1,4 @@
+from socket import SO_PRIORITY
 import streamlit as st
 import pandas as pd 
 import numpy as np
@@ -78,9 +79,9 @@ if agre:
 
 genre = st.radio(
     "Information about different types of bikes:",
-    ('commutator', 'sports', 'cafe racer'))
+    ('commuter', 'sports', 'cafe racer'))
 
-if genre == 'commutator':
+if genre == 'commuter':
     st.write('There are 21 street bikes currently on sale from various manufacturers starting from 67,573. The most popular products under this bracket are the Hero Splendor Plus (Rs. 85,685), Hero HF Deluxe (Rs. 73,698) and Honda SP 125 (Rs. 95,260) (all prices on-road).The top brands that manufacture street bikes are Hero, Honda, Bajaj. To know more about the latest prices of Commuter Bikes in your city, download BikeDekho App & get details on offers, variants, specifications, pictures, mileage, reviews and other details, please select your desired bike from the list below.')
     image = Image.open('bike3.jpg')
     st.image(image)
@@ -97,9 +98,56 @@ if genre == 'cafe racer':
     st.image(image)
 
 
+st.subheader("BIKE SELECTION")
+st.write("*Finding the right bike can be a complicated process for most of us. BikeWale helps you in making this process easier. You can search bikes based on brands, body styles, price, and displacement. Explore all the new bike models with their price in India. BikeWale brings you all the updates & expert reviews related to new bikes in India.*")
+
+
+tab1, tab2, tab3 = st.tabs(["brand", "budget","displacement"])
+with tab1:
+    st.subheader("You can search new bikes by brand like TVS, Honda, Royal Enfield, Hero, Yamaha and many more. Or you may search new bikes based on price or budget. Have a particular body type in mind like a commuter, sport bike, cruiser or want a scooter or electric bike? That's possible too! From the most iconic motorcycles to the top 10 bikes in India, ZigWheels has it all covered!")
+    img=Image.open("bike6.jpg")
+    st.image(img)
+
+
+with tab2:
+    st.subheader("Are you planning on buying a bike under ₹ 1 lakh? Well, we know that budget is one of the most crucial things while buying a bike and with so many options available out there, it gets really difficult to find a good bike which suits your pocket. Hence, we have put together a complete list of best bikes under ₹ 1 lakh. OLA S1 Air, Odysse Hawk and BGauss D15 are the 3 most popular bikes in this budget range. View the complete list of bikes with information regarding price, images, mileage, specifications, colors, reviews and much more for each of these bikes so that you get to choose the best bike under ₹ 1 lakh.")
+    l=[['Gemopai Astrid Lite','₹92,289'],['Benling Aura','₹91,646'],['TVS Raider 125','₹90,469'],['Pulsar NS160','₹1,23,781'],['Dominar 400','₹2,22,781'],['Pulsar N250','₹1,44,358']]
+    df=pd.DataFrame(l,columns=['Model Name','Ex-Showroom price'])
+    st.table(df)
+ 
+
+with tab3:
+    st.subheader("The size of motorcycle engines varies greatly. At the bottom of the scale, you’ll find dirt bikes and small-cc motorcycles like the Honda Rebel 300, with engine sizes from around 200 cc to 500 cc. At the top are monsters like the 2,500 cc Triumph Rocket 3.You’ll find strong opinions on the subject of cc’s within the motorcycle community. For example, bikes in the 250-300 cc range are common recommendations for folks looking to buy their first motorcycle. But you’ll also meet riders who will tell you that you’ll outgrow a 250 cc bike almost immediately and that it’s worth starting out on something more powerful.")
+    mew = st.radio("select cc:",
+        ('100-350cc', '>350cc'))
+
+    if(mew=='100-350cc'):
+        img = Image.open("bike7.jpg")
+        st.image(img,caption='''PLATINA''')
+        img = Image.open("bike8.jpg")
+        st.image(img,caption='''r15''')
+        img = Image.open("bike9.jpg")
+        st.image(img,caption='''duke200''')
+        img = Image.open("bike10.jpg")
+        st.image(img,caption='''royal enfield''')
+
+
+    if(mew=='>350cc'):
+    
+        img = Image.open("bike11.jpg")
+        st.image(img,caption='''rc390''')
+        img = Image.open("bike12.jpg")
+        st.image(img,caption='''duke390''')
+        img = Image.open("bike13.jpg")
+        st.image(img,caption='''dominor400''')
+        img = Image.open("bike14.jpg")
+        st.image(img,caption='''continental gt''')
+        img = Image.open("bike15.jpg")
+        st.image(img,caption='''BMW s1000rr''')
+  
 
 age = st.slider('How many bikes do you have?', 0, 4)
-st.write("I want ", age, ' bikes')
+st.write("I have ", age, ' bikes')
 
 
 
@@ -120,3 +168,4 @@ st.bokeh_chart(p, use_container_width=True)
 
 rat = st.slider('do you like it?', 0, 10, 5)
 st.write("I would rate it a", rat)
+
